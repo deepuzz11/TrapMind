@@ -1,0 +1,4 @@
+Flask
+TensorFlow
+scikit-learn
+mysql-connector-python
