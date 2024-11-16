@@ -1,11 +1,14 @@
+import tensorflow as tf
 import numpy as np
-import pandas as pd
 
-def predict_behavior(model, new_data: pd.DataFrame):
-    """
-    Predict attacker behavior using the trained machine learning model.
-    """
-    prediction = model.predict(new_data)
-    predicted_behavior = 'Attack' if prediction == 1 else 'Benign'
-    print(f"Predicted Behavior: {predicted_behavior}")
-    return predicted_behavior
+# Load trained model and predict attack behavior
+def predict_behavior(input_data):
+    model = tf.keras.models.load_model('attack_behavior_model.h5')
+    prediction = model.predict(np.array([input_data]))
+    return prediction
+
+# Example usage
+if __name__ == '__main__':
+    example_input = np.random.rand(10)  # Random input data
+    prediction = predict_behavior(example_input)
+    print(f"Predicted behavior: {prediction}")

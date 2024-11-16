@@ -1,24 +1,20 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+import tensorflow as tf
+from models import create_model
+import numpy as np
 
-def train_model(data: pd.DataFrame):
-    """
-    Train a machine learning model to detect attack patterns based on input data.
-    """
-    # Assuming 'label' column contains attack type (e.g., 1 for attack, 0 for benign)
-    X = data.drop('label', axis=1)  # Features (e.g., network traffic, commands)
-    y = data['label']  # Labels (attack type)
+# Simulate loading attack data for training
+def load_training_data():
+    # Example data (features and labels)
+    X_train = np.random.rand(100, 10)  # Random features
+    y_train = np.random.randint(0, 2, 100)  # Random labels (0 or 1)
+    return X_train, y_train
 
-    # Split into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+def train_model():
+    model = create_model()
+    X_train, y_train = load_training_data()
+    model.fit(X_train, y_train, epochs=10)
+    model.save('attack_behavior_model.h5')
+    print("Model trained and saved.")
 
-    # Train a RandomForest model
-    model = RandomForestClassifier()
-    model.fit(X_train, y_train)
-
-    # Evaluate the model
-    accuracy = model.score(X_test, y_test)
-    print(f"Model Accuracy: {accuracy}")
-    
-    return model
+if __name__ == '__main__':
+    train_model()

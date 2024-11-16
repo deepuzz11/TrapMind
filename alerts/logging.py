@@ -1,10 +1,8 @@
 import logging
 
-# Setup logging to capture events
-logging.basicConfig(filename='honeypot_events.log', level=logging.DEBUG)
+def setup_logging():
+    logging.basicConfig(filename='trapmind.log', level=logging.INFO,
+                        format='%(asctime)s - %(message)s')
 
-def log_event(message: str):
-    """
-    Log significant events such as detected attacks or system anomalies.
-    """
-    logging.debug(f"Event logged: {message}")
+def log_event(message):
+    logging.info(message)

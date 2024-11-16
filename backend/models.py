@@ -1,15 +1,12 @@
 import tensorflow as tf
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import pandas as pd
+from tensorflow import keras
 
-# Example ML Model
-def train_model(data):
-    model = RandomForestClassifier()
-    X = data.drop('label', axis=1)  # Features
-    y = data['label']  # Labels
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-    model.fit(X_train, y_train)
-    accuracy = model.score(X_test, y_test)
-    print(f"Model Accuracy: {accuracy}")
+# Function to create a simple neural network model
+def create_model(input_shape=(10,)):
+    model = keras.Sequential([
+        keras.layers.Dense(64, activation='relu', input_shape=input_shape),
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(1, activation='sigmoid')  # Output layer for binary classification
+    ])
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model

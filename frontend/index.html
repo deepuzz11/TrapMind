@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrapMind Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>TrapMind Dashboard</h1>
-    <div id="attackData">
-        <h2>Recent Attack Data</h2>
-        <ul>
-            {% for attack in attack_data %}
-            <li>{{ attack }}</li>
-            {% endfor %}
-        </ul>
+    <div class="dashboard-container">
+        <h1>TrapMind Dashboard</h1>
+        <div id="attackData">
+            <h2>Recent Attack Data</h2>
+            <p>Loading...</p>
+        </div>
+        <button onclick="simulateVulnerability()">Simulate Vulnerability</button>
     </div>
-    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>

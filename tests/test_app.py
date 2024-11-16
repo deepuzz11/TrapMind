@@ -1,22 +1,20 @@
 import unittest
 from app import app
 
-class TestTrapMind(unittest.TestCase):
+class TestApp(unittest.TestCase):
+    def setUp(self):
+        self.app = app.test_client()
 
-    @classmethod
-    def setUpClass(cls):
-        cls.client = app.test_client()
-        cls.client.testing = True
-
-    def test_homepage(self):
-        """Test that the homepage loads successfully"""
-        response = self.client.get('/')
+    def test_index(self):
+        response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
 
-    def test_alert(self):
-        """Test sending an alert"""
-        response = self.client.get('/alert')
-        self.assertIn(b"Alert Sent", response.data)
+    def test_attack_data(self):
+        response = self.app.get('/get_attack_data')
+        self.assertEqual(response.status_code, 200)
+        data = response.json
+        self.assertIn('attack_type', data)
+        self.assertIn('details', data)
 
 if __name__ == '__main__':
     unittest.main()
