@@ -4,9 +4,9 @@ from email.mime.multipart import MIMEMultipart
 
 def send_alert(subject, body):
     # Setup email details
-    sender_email = "your_email@example.com"
-    receiver_email = "security_team@example.com"
-    password = "your_password"
+    sender_email = "deepika@gmail.com"
+    receiver_email = "security_team_deepika@gmail.com"
+    password = "trapmind"
     
     msg = MIMEMultipart()
     msg['From'] = sender_email
